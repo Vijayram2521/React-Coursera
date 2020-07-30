@@ -16,16 +16,17 @@ class DishDetail extends Component {
                return (
                    <React.Fragment>
                        <li>{com.comment}</li><br/>
-                       <li>-- {com.author}, {com.date}</li> <br/>
+                       <li>-- {com.author}, {new Intl.DateTimeFormat('en-US',{year : 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(com.date)))}</li> <br/>
                    </React.Fragment>
                ) ;
            }) ;
          return(
              <React.Fragment>
-                 <h4>Comments</h4>
-             <ul className="list-unstyled">
-                 {comt}
-             </ul>
+               <ul className="list-unstyled">
+                   <h4>Comments</h4>                   
+                    {comt}
+               </ul>   
+             
              </React.Fragment>
          ) ; 
        }
@@ -36,7 +37,8 @@ class DishDetail extends Component {
        const dish = this.props.dish ;
        if (dish != null) {
            return (
-               <React.Fragment>
+               <div className="container">
+                    <React.Fragment>
                  <div className="container">
                 <div className="row">
                   <div className="col-12 col-md-5 m-1">
@@ -53,7 +55,8 @@ class DishDetail extends Component {
                   </div>
                 </div>
             </div>
-               </React.Fragment>   
+               </React.Fragment>  
+               </div> 
            ) ;
        }
        else
