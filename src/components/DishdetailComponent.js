@@ -4,12 +4,18 @@ import {Link} from 'react-router-dom' ;
 import { LocalForm , Control, Errors} from 'react-redux-form';
 import {Loading} from './LoadingComponent' ;
 import { baseUrl } from '../shared/baseUrl';
+import {Fade, FadeTransform, Stagger} from 'react-animation-components' ;
 
 function RenderDish ({dish}) {
 
     if (dish != null) {
         return (
-                 <React.Fragment>
+            <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                <React.Fragment>
                  <Card>
                   <CardImg width="100%" top src={baseUrl + dish.image} alt={dish.name} />
                    <CardBody>
@@ -17,7 +23,8 @@ function RenderDish ({dish}) {
                     <CardText>{dish.description}</CardText>
                    </CardBody>
                  </Card>
-            </React.Fragment>  
+                </React.Fragment> 
+            </FadeTransform>
         ) ;
     }
     else
@@ -111,7 +118,6 @@ class CommentForm extends Component {
 
 
 function RenderComments({dishComments, postComment, dishId}) {
-    if(dishComments != null) {
         const comt = dishComments.map((com)=>{
             return (
                 <React.Fragment>
@@ -122,15 +128,19 @@ function RenderComments({dishComments, postComment, dishId}) {
         }) ;   
      return (
          <React.Fragment>
-                      <h4>Comments</h4>
-            <ul className="list-unstyled">
-             {comt}
-         </ul>
+             <Stagger in>
+                <h4>Comments</h4>
+                <Fade in>
+                    <ul className="list-unstyled">
+                      {comt}
+                     </ul>
+                </Fade>
+             </Stagger>
          <CommentForm dishId={dishId} postComment={postComment}/>
          </React.Fragment>
      )   
   }
-}
+
 
 const DishDetail = (props) => {
     if(props.isLoading){
