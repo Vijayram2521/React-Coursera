@@ -143,7 +143,7 @@ function RenderComments({dishComments, postComment, dishId}) {
 
 
 const DishDetail = (props) => {
-    if(props.isLoading){
+    if(props.dishesLoading){
         return(
             <div className="container">
                 <div className="row">
@@ -152,11 +152,11 @@ const DishDetail = (props) => {
             </div>
         );
     }
-    else if (props.errMess) {
+    else if (props.dishesErrMess) {
         return(
             <div className="container">
                 <div className="row">
-                    <h4>{props.errMess}</h4>
+                    <h4>{props.dishesErrMess}</h4>
                 </div>
             </div>
         );
